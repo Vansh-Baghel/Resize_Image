@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import logo from './goku.jpeg';
 
 function App() {
+  const [width , setWidth] = useState(100);
+  const [height , setHeight] = useState(300);
+  const [size , setSize] = useState({w : 100 , h : 120});
+ 
+  const getWidthEventHandler = (e) => {
+    setWidth(e.target.value);
+    console.log(e.target.value);
+  }
+
+  const getHeightEventHandler = (e) => {
+    setHeight(e.target.value);
+    console.log(e.target.value);
+  }
+
+  const buttonEventHandler = (e) => {
+    e.preventDefault();
+    setSize({w : width , h : height})
+    console.log(size.w , size.h);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={logo} style={{width : `${size.w}px` , height : `${size.h}px`}}></img>
+      <input onChange={getWidthEventHandler} type="text"></input>
+      <input onChange={getHeightEventHandler} type="text"></input>
+      <button onClick={buttonEventHandler}> Change Size </button>
     </div>
   );
 }
